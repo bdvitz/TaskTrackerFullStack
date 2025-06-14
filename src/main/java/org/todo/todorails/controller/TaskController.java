@@ -25,7 +25,7 @@ public class TaskController {
         // Fetch tasks due today for the current user
         List<Task> todayTasks = taskService.getTodayTasksForCurrentUser();
 
-        /** TODO 13 (a): add the list "todaysTask" object  to the "model"
+        /** DONE 13 (a): add the list "todaysTask" object  to the "model"
                          object with the attribute name "todayTasks"
                         using the method "addAttribute".
          **/
@@ -40,12 +40,12 @@ public class TaskController {
 
         LocalDateTime localDateTime = LocalDateTime.now();
         String formattedDate = DateTimeFormatter.ofPattern("MM/dd/yyyy").format(localDateTime);
-        /** TODO 14: send the "formattedDate" to the client with the attribute name "serverTime"
+        /** DONE 14: send the "formattedDate" to the client with the attribute name "serverTime"
          *           in the model
          **/
         model.addAttribute("serverTime", formattedDate);
 
-        /** TODO 20 (c): For the value of the attributes:
+        /** DONE 20 (c): For the value of the attributes:
          *                i. completedCount - replace 0 with a call to the method countByCompleted
          *                                    of the taskService with the parameter true.
          *                ii. pendingCount - replace 0 with a call to the method countByCompleted
@@ -86,7 +86,7 @@ public class TaskController {
     @PostMapping("/addtask")
     public String saveTask(@ModelAttribute("task") Task task, Model model, RedirectAttributes redirectAttributes) {
         try {
-            /** TODO 11: call the "saveTask" method of the "taskService" to save the task object passed **/
+            /** DONE 11: call the "saveTask" method of the "taskService" to save the task object passed **/
             this.taskService.saveTask(task);
             redirectAttributes.addFlashAttribute("successMessage", "Task added successfully!");
             return "redirect:/dashboard";

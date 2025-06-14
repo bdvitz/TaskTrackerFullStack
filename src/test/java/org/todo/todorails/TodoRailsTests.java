@@ -52,7 +52,7 @@ public class TodoRailsTests {
         assertTrue(true, "The project should compile without errors");
     }
 
-    // Test for TODO 1
+    // Test for DONE 1
     @Test
     public void testPublicAccessConfiguration() {
         // Setup
@@ -62,7 +62,7 @@ public class TodoRailsTests {
         assertTrue(true, "Task: 1 - Public access to /register and /css/** should be configured");
     }
 
-    // Test for TODO 2
+    // Test for DONE 2
     @Test
     public void testLoginFormCentered() {
         // Setup
@@ -72,7 +72,7 @@ public class TodoRailsTests {
         assertTrue(true, "Task: 2 - Login form should be centered");
     }
 
-    // Test for TODO 3
+    // Test for DONE 3
     @Test
     public void testRegisterFormAction() {
         // Setup
@@ -82,7 +82,7 @@ public class TodoRailsTests {
         assertTrue(true, "Task: 3 - Register form action should point to /register");
     }
 
-    // Test for TODO 8 (a)
+    // Test for DONE 8 (a)
     @Test
     public void testUserExistsByUsernameMethodExists() {
         try {
@@ -93,7 +93,7 @@ public class TodoRailsTests {
         }
     }
 
-    // Test for TODO 11
+    // Test for DONE 11
     @Test
     public void testSaveTask() {
         // Setup
@@ -112,7 +112,7 @@ public class TodoRailsTests {
         assertNotNull(savedTask, "Task: 11 - Task should be saved and returned");
     }
 
-    // Test for TODO 12
+    // Test for DONE 12
     @Test
     public void testGetTodayTasksForCurrentUser() {
         // Setup
@@ -133,7 +133,7 @@ public class TodoRailsTests {
         assertFalse(todayTasks.isEmpty(), "Task: 12 - Today's tasks should be returned");
     }
 
-    // Test for TODO 16
+    // Test for DONE 16
     @Test
     public void testMarkTaskAsDone() {
         // Setup
@@ -154,7 +154,7 @@ public class TodoRailsTests {
         assertTrue(task.isCompleted(), "Task: 16 - Task completion status should be true");
     }
 
-    // Test for TODO 20 (a)
+    // Test for DONE 20 (a)
     @Test
     public void testCountByCompletedMethodExists() {
         try {
@@ -165,7 +165,7 @@ public class TodoRailsTests {
         }
     }
 
-    // Test for TODO 20 (b)
+    // Test for DONE 20 (b)
     @Test
     public void testCountByCompleted() {
         // Check if the method exists

@@ -3,7 +3,7 @@ function validateForm()  {
     // Initialize an array to store error messages
     const errors = [];
 
-    /** TODO 7: put try-catch around the code leaving aside the declaration of array "errors"
+    /** DONE 7: put try-catch around the code leaving aside the declaration of array "errors"
      *          and the return statement at the end.
      *          If there is an error the push the message "Error handling form fields!" and
      *          return false.

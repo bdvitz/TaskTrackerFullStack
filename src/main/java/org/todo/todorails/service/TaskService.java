@@ -60,7 +60,7 @@ public class TaskService {
         // Get Task list
         List<Task> taskListForToday = new ArrayList<>();
 
-        /** TODO 12 : Call the method "findByUserAndDueDateAndCompleted"
+        /** DONE 12 : Call the method "findByUserAndDueDateAndCompleted"
          *            of the taskRepository object and pass the
          *            user object, currentDate object and status of completed status of false.
          *            assign the value returned to the array list taskListForToday.
@@ -103,7 +103,7 @@ public class TaskService {
         Task task = taskRepository.findByUserAndId(user, taskId);
 
         if (task != null && !task.isCompleted()) {
-            /** TODO 16: set the task completion status to of the "task" object to true **/
+            /** DONE 16: set the task completion status to of the "task" object to true **/
             task.setCompleted(true);
             task.setCompletionDate(LocalDate.now());
             taskRepository.save(task);
@@ -233,10 +233,10 @@ public class TaskService {
     }
 
     public int countByCompleted(boolean completedStatus) {
-        /** TODO 20 (b): replace the "return 0" with the value returned from a
+        /** DONE 20 (b): replace the "return 0" with the value returned from a
          *                call to the respository method  return the count of
          *                tasks based on the completion status from the TaskRespository
-         *               which you created in TODO 20 (a)
+         *               which you created in DONE 20 (a)
           **/
         return this.taskRepository.countByCompleted(completedStatus);
     }

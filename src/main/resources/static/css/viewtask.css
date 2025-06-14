@@ -42,7 +42,7 @@
 }
 
 /* color the task status */
-/** TODO 18: Add  "color: green;" style to the class ".task-status.completed"
+/** DONE 18: Add  "color: green;" style to the class ".task-status.completed"
              and add the "color: red;" style to the class ".task-status.pending". **/
  .task-status.completed {
     /* "Yes" for completed tasks */

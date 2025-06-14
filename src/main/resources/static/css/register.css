@@ -7,7 +7,7 @@
     /* Light background color to match theme */
     background-color: #E8F8FD;
     border-radius: 10px;
-    /** TODO 6 (a): apply box shadow of 0px 4px 8px
+    /** DONE 6 (a): apply box shadow of 0px 4px 8px
                     and transparency of 0.1
      **/
      box-shadow: 0px 4px 8px;
@@ -115,7 +115,7 @@
         width: 100%;  /* Full width buttons for mobile */
     }
 
-    /** TODO 6 (b): apply "flex-direction" to "column" for the "button-group" class **/
+    /** DONE 6 (b): apply "flex-direction" to "column" for the "button-group" class **/
     .button-group {
         flex-direction: column;
     }

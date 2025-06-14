@@ -2,7 +2,7 @@
 .login-container {
     width: 100%;
     max-width: 600px;
-    /** TODO 2: Put margin of 25px on "top" and "bottom" and "auto" on left and right **/
+    /** DONE 2: Put margin of 25px on "top" and "bottom" and "auto" on left and right **/
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: auto;

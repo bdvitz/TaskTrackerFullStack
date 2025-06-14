@@ -7,18 +7,18 @@ package org.todo.todorails.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+// import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.todo.todorails.service.UserService;
-import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.core.userdetails.UserDetailsService;
 
 // This annotation marks this class as a configuration class for Spring.
 // It’s basically saying “this class will define some beans (objects managed by Spring)”.
-@SuppressWarnings("unused")
+// @SuppressWarnings("unused")
 @Configuration
 @EnableWebSecurity // Enables Spring Security for the application. Very important!
 public class SecurityConfig {

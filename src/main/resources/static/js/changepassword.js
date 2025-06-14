@@ -33,15 +33,15 @@ function validateChangePasswordForm() {
     }
 
     // Check if the new password and confirm password match
-    /** TODO 22 (a): use the && operator and add another check to confirm the password and its confirmation matches **/
+    /** DONE 22 (a): use the && operator and add another check to confirm the password and its confirmation matches **/
     if (newPassword && confirmPassword && newPassword !== confirmPassword) {
         const errorItem = document.createElement("li");
         errorItem.textContent = "New password and confirm password do not match.";
 
-        /** TODO 22 (b): add/append the error item to the errorList using appendChild() **/
+        /** DONE 22 (b): add/append the error item to the errorList using appendChild() **/
         errorList.appendChild(errorItem);
 
-        /** TODO 22 (c): set the boolean variable "hasError" to true **/
+        /** DONE 22 (c): set the boolean variable "hasError" to true **/
         hasError = true;
     }
 

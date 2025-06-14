@@ -64,15 +64,15 @@ public class ProfileController {
 
 
         // Encode the new password
-        /** TODO 23 (b) :  use the "encode" method to encode the new password passed in "newPassword" **/
+        /** DONE 23 (b) :  use the "encode" method to encode the new password passed in "newPassword" **/
         String encodedPassword = passwordEncoder.encode(newPassword);
 
         // Update the password with the new password
-        /** TODO 23 (c) :  update the password in the "user" object using "setPassword" of the User class**/
+        /** DONE 23 (c) :  update the password in the "user" object using "setPassword" of the User class**/
         user.setPassword(encodedPassword);
 
         // Save the user with the updated password
-        /** TODO 23 (d) :  update the "user" object by using the "save" method of the "UserService" **/
+        /** DONE 23 (d) :  update the "user" object by using the "save" method of the "UserService" **/
         this.userService.save(user);
 
         // Add a success flash message and redirect to the dashboard
