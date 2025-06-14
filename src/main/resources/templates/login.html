@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ToDo Rails</title>
+    
+    <!-- These stylesheets are loaded using Thymeleaf's @{} syntax so paths are resolved relative to the app context -->
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 <div class="wrapper">
 
-    <!-- Header Section -->
+    <!-- Header Section: Contains the logo, app name, slogan, and a link back to home -->
     <div class="header">
         <div class="logo-section">
+            <!-- The logo image path is resolved using Thymeleaf so it works regardless of where the app is deployed -->
             <img th:src="@{/images/logo.png}" alt="ToDo Rails Logo" class="logo">
+            
             <div class="text-section">
                 <h1>ToDo Rails</h1>
                 <p>Keep Your Goals on Track</p>
             </div>
         </div>
         <div class="auth-links">
+            <!-- Link back to the home page -->
             <a th:href="@{/}">Home</a>
         </div>
     </div>
@@ -27,35 +32,41 @@
     <!-- Main Content for Login Page -->
     <div class="container login-container">
         <h1>Login</h1>
-        <!-- display flash message, if redirected from registration after success -->
-        <div th:if="${successMessage}" class="flash-alert flash-alert-success">
-            <h2 th:text="${successMessage}"></h2>
-        </div>
-        <!-- end display flash message, if redirected from registration after success -->
 
-        <!-- display error message, if redirected from login after failure -->
+        <!-- Flash success message: Shown if the user was redirected from registration with a success flag -->
+        <div th:if="${successMessage}" class="flash-alert flash-alert-success">
+            <h2 th:text="${successMessage}"></h2> <!-- Message comes from the controller model -->
+        </div>
+
+        <!-- Flash error message: Shown if the login attempt failed -->
         <div th:if="${param.error}" class="flash-alert flash-alert-danger">
             Invalid username or password. Please try again.
         </div>
-        <!-- end display error message, if redirected from login after failure -->
 
+        <!-- Login form: Submits via POST to /login, which Spring Security intercepts -->
         <form action="/login" method="post" >
+            <!-- Username field -->
             <label for="username">Username or Email:</label>
             <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
 
+            <!-- Password field -->
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
+            <!-- Submit button -->
             <button type="submit" class="btn btn-login">Continue</button>
 
+            <!-- Redundant error message (already shown above, but here in case form-specific validation is added later) -->
             <div class="error-message" th:if="${param.error}">
                 Invalid username or password, please try again.
             </div>
         </form>
+
+        <!-- Link to the registration page -->
         <p>Don't have an account? <a th:href="@{/register}">Register</a></p>
     </div>
 
-    <!-- Include the footer -->
+    <!-- Footer: This pulls in a Thymeleaf fragment called "footer" from fragments/footer.html -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 </div>
 </body>
