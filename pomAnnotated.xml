@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This line declares that the file is an XML document and uses UTF-8 encoding -->
+
+<!-- This is the root <project> element. It defines that we're using Maven and follows the 4.0.0 POM schema -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- This tells Maven the version of the POM model being used -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The parent is a special block — here, we inherit configuration from Spring Boot's starter parent.
+         This gives us sensible defaults like dependency versions, plugins, and settings. -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- These next few lines define basic info about your project -->
+    <groupId>org.todo</groupId>           <!-- This is like your project's namespace -->
+    <artifactId>todorails</artifactId>    <!-- The name of your built project -->
+    <version>0.0.1-SNAPSHOT</version>     <!-- Indicates this is still under development -->
+
+    <name>todorails</name>
+    <description>Demo project for Spring Boot</description>
+    <url/>
+
+    <!-- Licensing and developer info (optional but good for open-source or collaboration) -->
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+
+    <!-- SCM = Source Code Management; used for linking version control repositories like Git -->
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+
+    <!-- Properties section — here we specify that we’re using Java 21 -->
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <!-- Dependencies are external libraries your project needs to function.
+         This is the heart of Maven — it downloads these from the internet automatically! -->
+    <dependencies>
+
+        <!-- Spring Boot Web Starter: Adds Spring MVC + Tomcat so we can build web apps -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Adds validation annotations like @NotNull, @Email, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Adds Thymeleaf: A modern server-side Java template engine for HTML rendering -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- HATEOAS: Helps build REST APIs with hypermedia links -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+
+        <!-- DevTools: Useful during development — enables auto-restart, live reload, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>       <!-- Only included at runtime, not in packaged builds -->
+            <optional>true</optional>    <!-- Optional for production dependencies -->
+        </dependency>
+
+        <!-- Spring Data JPA: Makes it easy to interact with relational databases using Java objects -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- MySQL Connector: Allows the app to talk to a MySQL database -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version> <!-- Be sure your DB server supports this version -->
+        </dependency>
+
+        <!-- Spring Security Starter: Adds authentication and authorization capabilities -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- Testing support with JUnit, Mockito, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- This build section is where we declare plugins. 
+         The Spring Boot Maven plugin lets us easily package and run the app. -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
