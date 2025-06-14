@@ -39,7 +39,7 @@
             <h2 th:text="${errorMessage}"></h2>
         </div>
 
-        <!-- TODO 3: set action to point to "/register" -->
+        <!-- DONE 3: set action to point to "/register" -->
         <form action="/register" method="post" th:object="${user}" onsubmit="return validateForm()">
             <!-- Username and Email -->
             <label for="username">Username:</label>
@@ -47,7 +47,7 @@
 
             <label for="email">Email:</label>
 
-            <!-- TODO 5: add the th:field="*{email}" attribute to the email <input> field -->
+            <!-- DONE 5: add the th:field="*{email}" attribute to the email <input> field -->
             <input type="email" id="email" placeholder="Enter your email" th:field="*{email}" />
 
             <p class="error-message" th:if="${errorEmailMessage}" ><span th:text="${errorEmailMessage}"></span></p>

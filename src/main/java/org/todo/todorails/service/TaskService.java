@@ -1,5 +1,6 @@
 package org.todo.todorails.service;
 
+// Import statements
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,174 +11,118 @@ import org.todo.todorails.repository.TaskRepository;
 import org.todo.todorails.repository.UserRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-// import java.util.Date;
 import java.util.List;
 
+/**
+ * @Service marks this class as a Spring Service component.
+ * It tells Spring that this class contains business logic and should be managed by the Spring container.
+ * Services are typically used to define operations that interact with repositories (data access) and control flow.
+ */
 @Service
 public class TaskService {
 
+    /**
+     * @Autowired tells Spring to automatically inject the required dependencies (beans) into this class.
+     * In this case, Spring will inject instances of TaskRepository and UserRepository.
+     */
     @Autowired
     private TaskRepository taskRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    // Method to save a new task
+    /**
+     * Saves a new task for the currently logged-in user.
+     */
     public Task saveTask(Task task) {
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-        // Set the user who is saving the task
-        task.setUser(user);
-
-        // Set the current date as the dateAdded when the task is saved
-        task.setDateAdded(LocalDate.now());
-        return taskRepository.save(task);
+        task.setUser(user);                    // Assign the task to the current user
+        task.setDateAdded(LocalDate.now());   // Set current date
+        return taskRepository.save(task);     // Save to database
     }
 
-
-    // Get today's tasks for user
+    /**
+     * Returns today's tasks for the current user that are not marked as completed.
+     */
     public List<Task> getTodayTasksForCurrentUser() {
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
-
-        // Get current date
         LocalDate currentDate = LocalDate.now();
 
-        // Get Task list
-        List<Task> taskListForToday = new ArrayList<>();
-
-        /** DONE 12 : Call the method "findByUserAndDueDateAndCompleted"
-         *            of the taskRepository object and pass the
-         *            user object, currentDate object and status of completed status of false.
-         *            assign the value returned to the array list taskListForToday.
-          **/
-        taskListForToday = this.taskRepository.findByUserAndDueDateAndCompleted(user, currentDate, false);
-
-        //return the task list
-        return taskListForToday;
-
+        // Query for tasks due today and not completed
+        return taskRepository.findByUserAndDueDateAndCompleted(user, currentDate, false);
     }
 
-    // Method to get all tasks for current user
+    /**
+     * Returns all tasks for the current user.
+     */
     public List<Task> getAllTasksForCurrentUser() {
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
-
         return taskRepository.findByUser(user);
     }
 
-
-    // Method to mark a task as done
+    /**
+     * Marks the given task as completed, if it belongs to the current user and isn't already done.
+     */
     public boolean markTaskAsDone(Long taskId) {
-
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-        // Get the Task with user combined
         Task task = taskRepository.findByUserAndId(user, taskId);
 
         if (task != null && !task.isCompleted()) {
-            /** DONE 16: set the task completion status to of the "task" object to true **/
-            task.setCompleted(true);
-            task.setCompletionDate(LocalDate.now());
+            task.setCompleted(true);                        // Mark as done
+            task.setCompletionDate(LocalDate.now());        // Set completion date
             taskRepository.save(task);
             return true;
         }
 
-        // Task not found, not owned by user, or already marked done
-        return false;
+        return false; // Task doesn't exist or already completed
     }
 
-    // Method to get a task which is not done
+    /**
+     * Retrieves a task by its ID, only if it's incomplete and belongs to the current user.
+     */
     public Task getTaskById(Long taskId) {
-
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-        // Get the Task with user combined
         Task task = taskRepository.findByUserAndId(user, taskId);
 
-        if (task != null && !task.isCompleted()) {
-             return task;
-        }
-
-        // Task not found, not owned by user
-        return null;
+        return (task != null && !task.isCompleted()) ? task : null;
     }
 
-    // Method to get a task which does not look at the done flag
+    /**
+     * Retrieves a task by ID for the current user, regardless of whether it's completed or not.
+     */
     public Task getTaskByIdAny(Long taskId) {
-
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-        // Get the Task with user combined
-        Task task = taskRepository.findByUserAndId(user, taskId);
-
-        if (task != null ) {
-            return task;
-        }
-
-        // Task not found, not owned by user
-        return null;
+        return taskRepository.findByUserAndId(user, taskId);
     }
 
-    // Method to update an existing task
+    /**
+     * Updates a task's details, only if the logged-in user is the owner of the task.
+     */
     public boolean updateTaskForUser(Task task) {
-
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-
-        // Get task in database
         Task taskInDb = taskRepository.getById(task.getId());
 
-        // if the person who wants to update is not same as the user who created the task
-        if(user != null && !user.getUsername().equals(taskInDb.getUser().getUsername())  ) {
+        // Ensure the user updating is the task owner
+        if (user != null && !user.getUsername().equals(taskInDb.getUser().getUsername())) {
             return false;
         }
 
@@ -188,38 +133,26 @@ public class TaskService {
             existingTask.setPriority(task.getPriority());
             existingTask.setDueDate(task.getDueDate());
             existingTask.setType(task.getType());
-
-            // Update the current date as the dateAdded when the task is updated
             existingTask.setDateAdded(LocalDate.now());
 
-            Task taskUpdated = taskRepository.save(existingTask);
-
-            if(taskUpdated != null) {
-                return true;
-            }
+            return taskRepository.save(existingTask) != null;
         }
 
         return false;
     }
 
-
-    // Method to update an existing task
+    /**
+     * Deletes a task if it belongs to the currently authenticated user.
+     */
     public boolean deleteTask(Task task) {
-
-        // Get the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // Get the username
         String username = authentication.getName();
-
-        // Get the user object
         User user = userRepository.findByUsername(username);
 
-        // Get task in database
         Task taskInDb = taskRepository.getById(task.getId());
 
-        // if the person who wants to update is not same as the user who created the task
-        if(user != null && !user.getUsername().equals(taskInDb.getUser().getUsername())  ) {
+        // Check if task belongs to user
+        if (user != null && !user.getUsername().equals(taskInDb.getUser().getUsername())) {
             return false;
         }
 
@@ -232,12 +165,10 @@ public class TaskService {
         return false;
     }
 
+    /**
+     * Counts the number of tasks based on whether they are completed or not.
+     */
     public int countByCompleted(boolean completedStatus) {
-        /** DONE 20 (b): replace the "return 0" with the value returned from a
-         *                call to the respository method  return the count of
-         *                tasks based on the completion status from the TaskRespository
-         *               which you created in DONE 20 (a)
-          **/
         return this.taskRepository.countByCompleted(completedStatus);
     }
 }
