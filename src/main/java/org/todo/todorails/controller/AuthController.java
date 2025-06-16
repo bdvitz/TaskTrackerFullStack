@@ -59,7 +59,7 @@ public class AuthController {
             model.addAttribute("user", user);
 
             // Redirect to register
-            return "redirect:/register";
+            return "redirect:/register?error";
         }
     }
 }
