@@ -15,15 +15,26 @@ public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() ) {
-            redirectAttributes.addFlashAttribute("errorMessage","Redirected to Dashboard due to issue!");
-            return new ModelAndView("redirect:/dashboard");
+        Object statusCodeObj = request.getAttribute("jakarta.servlet.error.status_code");
+        
+        if (statusCodeObj != null) {
+            int statusCode = Integer.parseInt(statusCodeObj.toString());
+            
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            
+            if (authentication != null && authentication.isAuthenticated()) {
+                if (statusCode >= 400) { // Only handle real errors
+                    redirectAttributes.addFlashAttribute("errorMessage", "Redirected to Dashboard due to issue!");
+                    return new ModelAndView("redirect:/dashboard");
+                } else {
+                    // Probably not an error — stay on normal flow
+                    return new ModelAndView("redirect:/dashboard");
+                }
+            }
         }
         return new ModelAndView("redirect:/login");
     }
 
-    // Override the default error path (not strictly required, but good practice)
     public String getErrorPath() {
         return "/error";
     }
