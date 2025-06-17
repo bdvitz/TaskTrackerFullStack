@@ -55,10 +55,10 @@ public class ProfileController {
         if (user == null || !passwordEncoder.matches(currentPassword,user.getPassword())) {
 
             // If passwords don't match, add a flash message and redirect to the dashboard
-            redirectAttributes.addFlashAttribute("errorMessage", "Password not updated");
+            redirectAttributes.addFlashAttribute("errorMessage", "Current password does not match user password. Password not updated!");
 
             // Redirect to the dashboard
-            return "redirect:/dashboard";
+            return "redirect:/changepassword?error";
 
         }
 
