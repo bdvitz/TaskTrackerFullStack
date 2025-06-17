@@ -1,8 +1,8 @@
 This code is based on course material from Amazon Junior Software Developer on Coursera. 
 All rights to the original code belong to the course authors and platform.
 This repository is for personal, educational use only.
+original HELP.md contents below:
 
-# original HELP.md contents below:
 # Getting Started
 
 ### Reference Documentation
