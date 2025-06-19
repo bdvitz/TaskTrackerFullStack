@@ -32,7 +32,7 @@ public class CustomErrorController implements ErrorController {
                 }
             }
         }
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("redirect:/dashboard");
     }
 
     public String getErrorPath() {
