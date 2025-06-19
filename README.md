@@ -6,7 +6,47 @@ original HELP.md contents below:
 
 # Getting Started
 
-### Reference Documentation
+## Setup Instructions to run this project locally
+
+### 1️⃣ Set up MySQL
+
+Ensure you have a MySQL server running locally.  
+You will need to create a database and a user that matches the credentials in your environment file.
+
+Example MySQL commands (run these in your MySQL client or terminal):
+
+```sql
+-- Replace 'myapp_db', 'myapp_user', and 'strong_password' as needed
+CREATE DATABASE myapp_db;
+
+CREATE USER 'myapp_user'@'localhost' IDENTIFIED BY 'strong_password';
+
+GRANT ALL PRIVILEGES ON myapp_db.* TO 'myapp_user'@'localhost';
+
+FLUSH PRIVILEGES;
+```
+### 2️⃣ Set up your environment variables
+Copy the '.env.example' file to create an '.env' file
+```cmd
+copy .env.example .env
+```
+with the contents matching your MySQL database name and user details.
+```ini
+# .env file contents
+DB_USERNAME=myapp_user
+DB_PASSWORD=strong_password
+DB_NAME=myapp_db
+```
+
+### 3️⃣ Run the application
+Once your database and environment variables are set:
+- Install dependencies listed in the pom.xml
+- Run migrations (if applicable)
+- Start your server
+
+---
+
+# Reference Documentation
 For further reference, please consider the following sections:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
@@ -17,7 +57,7 @@ For further reference, please consider the following sections:
 * [Spring Data JPA](https://docs.spring.io/spring-boot/3.3.5/reference/data/sql.html#data.sql.jpa-and-spring-data)
 * [Spring Boot DevTools](https://docs.spring.io/spring-boot/3.3.5/reference/using/devtools.html)
 
-### Guides
+# Guides
 The following guides illustrate how to use some features concretely:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
